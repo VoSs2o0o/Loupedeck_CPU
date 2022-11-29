@@ -15,7 +15,7 @@ displayName: VoCPU
 pluginFileName: VoCPUPlugin.dll
 
 # Plugin version.
-version: 1.0.0
+version: 1.0.1
 
 # Author of the plugin. The author can be a company or an individual developer.
 author: VoSs2o0o

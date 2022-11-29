@@ -3,7 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.IO;
     using System.Linq;
+    using System.Reflection;
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
@@ -17,7 +19,7 @@
         public DisplayCPU()
         : base(displayName: "Display CPU %", description: "Displays the CPU utilization.", groupName: "")
         {
-            this._background = BitmapImage.FromFile("assets\\CPU-xxsmallc.png");
+            this._background = BitmapImage.FromFile(Path.Combine(AssemblyDirectory, "assets\\CPU-xxsmallc.png"));
             this._timer = new System.Timers.Timer(1000);
             this._timer.Elapsed += (sender, e) =>
             {
@@ -54,6 +56,17 @@
             bitmap.DrawImage(this._background, 0, 0);
             bitmap.DrawText(this.GetCommandDisplayName(actionParameter, imageSize), BitmapColor.White, 16);
             return bitmap.ToImage();
+        }
+
+        public static string AssemblyDirectory
+        {
+            get
+            {
+                string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+                UriBuilder uri = new UriBuilder(codeBase);
+                string path = Uri.UnescapeDataString(uri.Path);
+                return Path.GetDirectoryName(path);
+            }
         }
     }
 }
