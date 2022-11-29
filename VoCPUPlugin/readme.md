@@ -1,0 +1,1 @@
+﻿CPU utilization for Loupedeck
